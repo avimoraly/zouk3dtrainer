@@ -24,6 +24,7 @@ export default function ZoukTrainer() {
   const targetBSRef = useRef(0);  // target body speed for smooth reverse
   const targetHSRef = useRef(0);  // target head speed for smooth reverse
   const reversingRef = useRef(false); // true while transitioning
+  const ttTimeoutRef = useRef(null); // Tilted Turns setTimeout handle
   const frozenTiltZRef = useRef(0);
   const figPosRef  = useRef({ x: 0, z: 0 });
   const keysRef   = useRef({});
@@ -59,6 +60,7 @@ export default function ZoukTrainer() {
   ];
 
   const doReset = () => {
+    if (ttTimeoutRef.current) { clearTimeout(ttTimeoutRef.current); ttTimeoutRef.current = null; }
     bodySpeedRef.current = 0;        setBodySpeed(0);
     headSpeedRef.current = 0;        setHeadSpeed(0);
     tiltModeRef.current = 'circular'; setTiltMode('circular');
@@ -85,10 +87,11 @@ export default function ZoukTrainer() {
     bateCabeloRef.current = !!preset.bateCabelo;
 
     if (preset.name === 'Tilted Turns') {
-      // TT: rotation=1, head=0.1 for 1s then head=0
-      setTimeout(() => {
+      if (ttTimeoutRef.current) clearTimeout(ttTimeoutRef.current);
+      ttTimeoutRef.current = setTimeout(() => {
         headSpeedRef.current = 0; setHeadSpeed(0);
-      }, 1000);
+        ttTimeoutRef.current = null;
+      }, 300);
     } else if (preset.tilt !== 0) {
       {
         baseTiltRef.current = { x: 0, z: 0 };
@@ -752,20 +755,7 @@ export default function ZoukTrainer() {
       // Body rotation: value = rotations per 3 sec → rad/frame = v * 2π/180
 
       // Smooth reverse transition
-      if (reversingRef.current) {
-        const lerpSpeed = 0.12; // ~0.5s transition
-        bodySpeedRef.current += (targetBSRef.current - bodySpeedRef.current) * lerpSpeed;
-        headSpeedRef.current += (targetHSRef.current - headSpeedRef.current) * lerpSpeed;
-        // Snap when close enough
-        if (Math.abs(bodySpeedRef.current - targetBSRef.current) < 0.005 &&
-            Math.abs(headSpeedRef.current - targetHSRef.current) < 0.005) {
-          bodySpeedRef.current = targetBSRef.current;
-          headSpeedRef.current = targetHSRef.current;
-          setBodySpeed(targetBSRef.current);
-          setHeadSpeed(targetHSRef.current);
-          reversingRef.current = false;
-        }
-      }
+      // Reverse is now instant — handled directly in the button click
       bodyA -= bodySpeedRef.current * sm * (2 * Math.PI / 180);
       fig.rotation.y = bodyA;
 
@@ -1129,7 +1119,7 @@ export default function ZoukTrainer() {
         <div className="zt-header-title" style={{ display: 'flex', alignItems: 'center', flexShrink: 0, flex: isMobile ? 1 : 'none', position: 'relative', justifyContent: 'center' }}>
           <span className="zt-title" style={{ fontSize: 15, fontWeight: 900, letterSpacing: 2, color: '#ffcc55' }}>Zouk 3D Trainer</span>
           {isMobile && <div style={{ position: 'absolute', right: 0, display: 'flex', gap: 4 }}>
-            <a className="zt-btn-manual" href="/manual.html" title="User Manual"
+            <a className="zt-btn-manual" href="manual.html" title="User Manual"
               style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>?</a>
             <button
               className="zt-btn-about"
@@ -1162,7 +1152,7 @@ export default function ZoukTrainer() {
               </div>
             ))}
           </div>
-          <a className="zt-btn-manual" href="/manual.html" title="User Manual"
+          <a className="zt-btn-manual" href="manual.html" title="User Manual"
             style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>?</a>
           <button
             className="zt-btn-about"
@@ -1208,10 +1198,13 @@ export default function ZoukTrainer() {
 
         {/* Reverse button */}
         <button className="zt-btn-reverse" title="Reverse direction"
-          onClick={() => {
-            targetBSRef.current = -bodySpeedRef.current;
-            targetHSRef.current = -headSpeedRef.current;
-            reversingRef.current = true;
+          onPointerDown={() => {
+            if (ttTimeoutRef.current) { clearTimeout(ttTimeoutRef.current); ttTimeoutRef.current = null; }
+            const newBS = -bodySpeedRef.current;
+            const newHS = -headSpeedRef.current;
+            bodySpeedRef.current = newBS; setBodySpeed(newBS);
+            headSpeedRef.current = newHS; setHeadSpeed(newHS);
+            setActivePreset(null);
           }}
           style={{
             width: 30, height: 30, borderRadius: 6, fontSize: 13, fontWeight: 700, flexShrink: 0, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: 0, lineHeight: 1,
