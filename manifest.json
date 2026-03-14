@@ -1,12 +1,16 @@
 {
+  "id": "zouk3dtrainer",
   "name": "Brazilian Zouk 3D Trainer",
   "short_name": "Zouk Trainer",
   "description": "Interactive 3D dance movement visualizer for Brazilian Zouk",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#1a1410",
   "theme_color": "#3a3028",
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     { "src": "icons/icon-72.png",  "sizes": "72x72",   "type": "image/png" },
     { "src": "icons/icon-96.png",  "sizes": "96x96",   "type": "image/png" },
@@ -17,6 +21,21 @@
     { "src": "icons/icon-384.png", "sizes": "384x384", "type": "image/png" },
     { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ],
-  "categories": ["entertainment", "education"],
-  "lang": "en"
+  "screenshots": [
+    {
+      "src": "preview.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Brazilian Zouk 3D Trainer on desktop"
+    },
+    {
+      "src": "instagram-post.png",
+      "sizes": "1080x1080",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Brazilian Zouk 3D Trainer on mobile"
+    }
+  ],
+  "categories": ["entertainment", "education"]
 }
