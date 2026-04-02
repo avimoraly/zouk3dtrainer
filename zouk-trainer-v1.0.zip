@@ -1,48 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzJhMjAxOCIvPjxyZWN0IHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgcng9IjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2NjOTk0NCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48dGV4dCB4PSIxNiIgeT0iMjMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNmZmNjNTUiPlo8L3RleHQ+PC9zdmc+">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#3a3028">
-  <meta property="fb:app_id" content="1503011584671001" />
-  <meta property="og:title" content="Brazilian Zouk 3D Trainer" />
-  <meta property="og:description" content="Interactive 3D dance movement visualizer for Brazilian Zouk" />
-  <meta property="og:image" content="https://zouk3dtrainer.netlify.app/preview.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://zouk3dtrainer.netlify.app" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://zouk3dtrainer.netlify.app/preview.png" />
-  <title>Zouk 3D Trainer — Avi Moraly</title>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DM3ZH4XNDS"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DM3ZH4XNDS');
-  </script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body, #root { width: 100%; height: 100%; overflow: hidden; background: #1a1410; }
-    .zt-speed-slider-track { flex: 1; min-height: 0; }
-    .zt-slider-speed { height: 100% !important; }
-  </style>
-</head>
-<body>
-  <div id="root"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script type="text/babel" data-presets="react">
-    const { useEffect, useRef, useState } = React;
+import { useEffect, useRef, useState } from "react";
+import * as THREE from "three";
 
-
-function ZoukTrainer() {
+export default function ZoukTrainer() {
   const mountRef     = useRef(null);
   const bodySpeedRef = useRef(0);
   const headSpeedRef = useRef(0);
@@ -1707,14 +1666,3 @@ function ZoukTrainer() {
     </>
   );
 }
-
-
-    ReactDOM.createRoot(document.getElementById('root')).render(<ZoukTrainer />);
-  </script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js'); });
-    }
-  </script>
-</body>
-</html>
