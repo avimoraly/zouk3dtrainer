@@ -1,45 +1,133 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0e0b08"/>
-      <stop offset="100%" stop-color="#1e1508"/>
-    </linearGradient>
-    <linearGradient id="goldH" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#fff0a0"/>
-      <stop offset="40%" stop-color="#ffcc55"/>
-      <stop offset="100%" stop-color="#a06010"/>
-    </linearGradient>
-    <linearGradient id="goldH2" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffdd88"/>
-      <stop offset="100%" stop-color="#885510"/>
-    </linearGradient>
-    <radialGradient id="spotlight" cx="50%" cy="40%" r="60%">
-      <stop offset="0%" stop-color="#cc8800" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="6" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#spotlight)"/>
-  <g opacity="0.07" stroke="#cc9944" stroke-width="0.8">
-    <line x1="0" y1="630" x2="600" y2="420"/><line x1="200" y1="630" x2="600" y2="420"/>
-    <line x1="400" y1="630" x2="600" y2="420"/><line x1="600" y1="630" x2="600" y2="420"/>
-    <line x1="800" y1="630" x2="600" y2="420"/><line x1="1000" y1="630" x2="600" y2="420"/>
-    <line x1="1200" y1="630" x2="600" y2="420"/>
-    <line x1="0" y1="540" x2="1200" y2="540"/><line x1="0" y1="580" x2="1200" y2="580"/>
-    <line x1="0" y1="610" x2="1200" y2="610"/>
-  </g>
-  <rect x="18" y="18" width="1164" height="594" rx="14" fill="none" stroke="#7a5520" stroke-width="1" opacity="0.6"/>
-  <rect x="24" y="24" width="1152" height="582" rx="11" fill="none" stroke="#cc9944" stroke-width="0.5" opacity="0.3"/>
-  <text x="600" y="148" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="300" fill="#cc9944" letter-spacing="18" opacity="0.85">BRAZILIAN</text>
-  <text x="600" y="310" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="165" font-weight="bold" fill="url(#goldH)" letter-spacing="-4" filter="url(#glow)">ZOUK</text>
-  <line x1="280" y1="338" x2="920" y2="338" stroke="#cc9944" stroke-width="0.8" opacity="0.5"/>
-  <text x="600" y="384" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="url(#goldH2)" letter-spacing="20">3D TRAINER</text>
-  <text x="600" y="440" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="300" fill="#886633" letter-spacing="4">INTERACTIVE DANCE MOVEMENT VISUALIZER</text>
-  <text x="600" y="570" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="300" fill="#5a4020" letter-spacing="3">by Avi Moraly</text>
-  <text x="60" y="590" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#cc9944" opacity="0.06">Z</text>
-  <text x="1100" y="590" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#cc9944" opacity="0.06">Z</text>
-</svg>
+# 🎵 Brazilian Zouk 3D Trainer
+
+An interactive 3D dance movement visualizer for Brazilian Zouk, built with React + Three.js.
+
+**Live app:** https://zouk3dtrainer.netlify.app  
+**Created by:** Avi Moraly
+
+---
+
+## 📁 File Structure
+
+```
+zouk-deploy/
+├── index.html            ← Main app (self-contained, no build step needed)
+├── manual.html           ← User manual with illustrated controls guide
+├── manifest.json         ← PWA web app manifest
+├── sw.js                 ← Service worker (offline support)
+├── preview.png           ← OG image for WhatsApp / Facebook link previews (1200×630)
+├── preview.svg           ← SVG version of the preview image
+├── instagram-post.png    ← Instagram square post image (1080×1080)
+├── instagram-story.png   ← Instagram story image (1080×1920)
+├── app-icon-1024.png     ← Facebook Developer app icon (1024×1024)
+├── app-icon-512.png      ← App icon fallback (512×512)
+├── zouk-trainer.jsx      ← Full React source code
+└── icons/                ← PWA icon set
+    ├── icon-72.png
+    ├── icon-96.png
+    ├── icon-128.png
+    ├── icon-144.png
+    ├── icon-152.png
+    ├── icon-192.png
+    ├── icon-384.png
+    └── icon-512.png
+```
+
+---
+
+## 🚀 Deployment
+
+### Netlify Drop (easiest)
+1. Unzip the archive
+2. Go to https://app.netlify.com/drop
+3. Drag and drop the `zouk-deploy` **folder** onto the page
+4. Done — the app is live at your Netlify URL
+
+### Custom domain
+In Netlify dashboard → Domain settings → Add custom domain
+
+---
+
+## ✨ Features
+
+- **3D humanoid figure** with realistic proportions, skin, clothing and shoes
+- **Verlet hair physics** — hair responds to movement in real time
+- **8 dance movement presets** — Circular, Tilted Turns, Toalha, Roasted Chicken, Hyper Toalha, Chicote Lateral, Horse Saddle, Planet
+- **Body Rotation control** — speed -3 to +3, left or right
+- **Head Movement control** — speed -3 to +3, CW or CCW
+- **3 Tilt Modes** — Circular orbit, Forward/Back, Left/Right
+- **Flexibility slider** — controls how much of the body chain (chest, spine, hips) joins the head tilt
+- **Speed slider** — global slow motion / fast forward (0% to 150%), true physics slow-motion including hair
+- **Camera orbit** — drag to rotate, pinch or scroll to zoom
+- **Figure movement** — MOVE toggle + D-pad (or WASD on desktop)
+- **Reverse button** — smoothly flips direction
+- **Studio environment** — parquet floor, mirror wall, ballet barre, benches, ceiling spotlights
+- **PWA support** — installable on mobile, works offline
+- **OG meta tags** — rich previews on WhatsApp, Facebook
+- **Responsive** — works on mobile and desktop browsers
+
+---
+
+## 🎛️ Controls Reference
+
+| Control | Location | Function |
+|---|---|---|
+| Preset dropdown | Preset bar | Load a dance movement preset |
+| ⇄ Reverse | Preset bar | Flip body + head direction |
+| ↺ Reset | Preset bar | Stop all, return to neutral |
+| ■ Stop | Preset bar | Zero both speeds instantly |
+| ⟳ ↕ ↔ | Right edge of canvas | Tilt mode (circular / fwd-back / left-right) |
+| ⚡ SPEED | Upper-left of canvas | Toggle global speed slider (0–150%) |
+| MOVE | Lower-left of canvas | Toggle D-pad to walk figure |
+| Body Rotation | Controls panel | -3 to 3 speed buttons + slider |
+| Head Movement | Controls panel | -3 to 3 speed buttons + slider |
+| Flexibility | Controls panel | 0–100% body chain participation |
+| ? | Header | Opens this manual |
+| ℹ | Header | Opens About / contact dialog |
+
+---
+
+## 📱 Social Media Files
+
+| File | Use |
+|---|---|
+| `preview.png` | Deploy alongside `index.html` — auto-shows as link preview on WhatsApp and Facebook |
+| `instagram-post.png` | Save to phone → post as Instagram square |
+| `instagram-story.png` | Save to phone → post as Instagram story (add link sticker) |
+| `app-icon-1024.png` | Upload to Facebook Developer dashboard → Settings → Basic → App Icon |
+
+---
+
+## 📲 PWA / Android App
+
+The app is PWA-ready. To install on Android:
+1. Open the live URL in Chrome
+2. Tap the browser menu → **"Add to Home Screen"**
+3. The app installs like a native app with the Z icon
+
+For a standalone APK via PWABuilder:
+1. Go to https://pwabuilder.com
+2. Paste `https://zouk3dtrainer.netlify.app`
+3. Download the Android package
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Version | Purpose |
+|---|---|---|
+| React | 18 | UI components and state |
+| Three.js | r128 | 3D rendering |
+| Babel Standalone | latest | JSX transpilation in-browser |
+| Verlet integration | custom | Hair physics simulation |
+
+No build step required — everything runs directly in the browser via CDN scripts.
+
+---
+
+## 📧 Contact
+
+**Avi Moraly**  
+Email: avimoraly@gmail.com  
+Instagram: @avimoraly  
+Facebook: facebook.com/avimoraly
