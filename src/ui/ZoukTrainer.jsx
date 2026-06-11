@@ -238,7 +238,7 @@ function ZoukTrainer() {
               className="zt-btn-share"
               title="Share this trainer"
               onClick={shareApp}
-              style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 11, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>↗</button>
+              style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 11, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
             <a className="zt-btn-manual" href="manual.html" title="User Manual" onClick={() => gaEvent('manual_opened', { platform: 'mobile' })}
               style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>?</a>
             <button
@@ -277,7 +277,7 @@ function ZoukTrainer() {
             className="zt-btn-share"
             title="Share this trainer"
             onClick={shareApp}
-            style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 11, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>↗</button>
+            style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 11, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
           <a className="zt-btn-manual" href="manual.html" title="User Manual" onClick={() => gaEvent('manual_opened', { platform: 'desktop' })}
             style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>?</a>
           <button
