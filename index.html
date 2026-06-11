@@ -71,7 +71,9 @@ function ZoukTrainer() {
   const keysRef   = useRef({});
   const [moveEnabled, setMoveEnabled] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
+  const [shareMessage, setShareMessage] = useState('');
   const moveEnabledRef = useRef(false);
+  const shareToastTimerRef = useRef(null);
   const isDragging   = useRef(false);
   const lastMouseX   = useRef(0);
   const lastMouseY   = useRef(0);
@@ -182,6 +184,39 @@ function ZoukTrainer() {
   // ── GA4 event helper ──
   const gaEvent = (name, params = {}) => {
     if (typeof gtag !== 'undefined') gtag('event', name, params);
+  };
+
+  const shareApp = async () => {
+    const shareUrl = window.location.href;
+    const shareData = {
+      title: 'Brazilian Zouk 3D Trainer',
+      text: 'Try this interactive Brazilian Zouk 3D Trainer!',
+      url: shareUrl,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        gaEvent('share_pressed', { method: 'native' });
+        setShareMessage('Shared successfully');
+      } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        gaEvent('share_pressed', { method: 'clipboard' });
+        setShareMessage('Link copied to clipboard');
+      } else {
+        window.prompt('Copy this link to share:', shareUrl);
+        gaEvent('share_pressed', { method: 'prompt' });
+        setShareMessage('Copy this link manually');
+      }
+    } catch (err) {
+      if (err && err.name !== 'AbortError') {
+        console.error('Share failed:', err);
+        setShareMessage('Sharing is unavailable here');
+      }
+    }
+
+    clearTimeout(shareToastTimerRef.current);
+    shareToastTimerRef.current = setTimeout(() => setShareMessage(''), 1800);
   };
 
   const setBS = (v) => { bodySpeedRef.current = v; setBodySpeed(v); setActivePreset(null); lastTimeRef.current = performance.now(); gaEvent('body_speed_set', { speed: v }); };
@@ -1283,7 +1318,12 @@ function ZoukTrainer() {
         {/* Title — always shown */}
         <div className="zt-header-title" style={{ display: 'flex', alignItems: 'center', flexShrink: 0, flex: isMobile ? 1 : 'none', position: 'relative', justifyContent: 'center' }}>
           <span className="zt-title" style={{ fontSize: 15, fontWeight: 900, letterSpacing: 2, color: '#ffcc55' }}>Zouk 3D Trainer</span>
-          {isMobile && <div style={{ position: 'absolute', right: 0, display: 'flex', gap: 4 }}>
+          {isMobile && <div style={{ position: 'absolute', right: 0, display: 'flex', gap: 4, alignItems: 'center' }}>
+            <button
+              className="zt-btn-share"
+              title="Share this trainer"
+              onClick={shareApp}
+              style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 11, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>↗</button>
             <a className="zt-btn-manual" href="manual.html" title="User Manual" onClick={() => gaEvent('manual_opened', { platform: 'mobile' })}
               style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>?</a>
             <button
@@ -1291,6 +1331,7 @@ function ZoukTrainer() {
               title="About"
               onClick={() => setShowAbout(v => !v)}
               style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 13, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0 }}>ℹ</button>
+            {shareMessage && <span style={{ color: '#ffe5b0', fontSize: 9, whiteSpace: 'nowrap', marginLeft: 4 }}>{shareMessage}</span>}
           </div>}
         </div>
 
@@ -1317,6 +1358,11 @@ function ZoukTrainer() {
               </div>
             ))}
           </div>
+          <button
+            className="zt-btn-share"
+            title="Share this trainer"
+            onClick={shareApp}
+            style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 11, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>↗</button>
           <a className="zt-btn-manual" href="manual.html" title="User Manual" onClick={() => gaEvent('manual_opened', { platform: 'desktop' })}
             style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>?</a>
           <button
@@ -1324,6 +1370,7 @@ function ZoukTrainer() {
             title="About"
             onClick={() => { setShowAbout(v => !v); gaEvent('about_opened'); }}
             style={{ width: 24, height: 24, borderRadius: '50%', background: '#3a3028', border: '1px solid #6a5438', color: '#cc9944', fontSize: 13, fontWeight: 700, cursor: 'pointer', lineHeight: '24px', flexShrink: 0 }}>ℹ</button>
+          {shareMessage && <span style={{ color: '#ffe5b0', fontSize: 10, whiteSpace: 'nowrap', marginLeft: 6 }}>{shareMessage}</span>}
         </>}
       </div>
 
