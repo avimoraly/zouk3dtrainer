@@ -18,13 +18,6 @@ ZT.Overlays = function ({ showEasterEgg, eggResetTimer, showAbout, setShowAbout 
           background:'radial-gradient(ellipse at center, rgba(150,0,0,0.50) 0%, rgba(0,0,0,0.82) 100%)',
           animation:'egg-fade 0.5s ease-out',
         }}>
-          <style>{`
-            @keyframes egg-fade    { from{opacity:0} to{opacity:1} }
-            @keyframes egg-slam    { 0%{transform:scale(0.1) translateY(60px);opacity:0;letter-spacing:60px} 65%{transform:scale(1.12) translateY(-6px);opacity:1;letter-spacing:5px} 100%{transform:scale(1) translateY(0);letter-spacing:4px} }
-            @keyframes egg-shake   { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-10px)} 40%{transform:translateX(10px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)} }
-            @keyframes egg-sub     { 0%,55%{opacity:0;transform:translateY(24px)} 100%{opacity:1;transform:translateY(0)} }
-            @keyframes egg-flicker { 0%,100%{opacity:1} 50%{opacity:0.6} }
-          `}</style>
           <div style={{ width:'75%', height:5, background:'linear-gradient(to right,transparent,#cc0000,#cc0000,transparent)', borderRadius:3, marginBottom:28 }} />
           <div className="zt-egg-title" style={{
             fontFamily:"'Impact','Arial Black',sans-serif",

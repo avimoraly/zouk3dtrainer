@@ -1,9 +1,10 @@
-const CACHE_NAME = 'zouk-trainer-v4';
+const CACHE_NAME = 'zouk-trainer-v5';
 const ASSETS = [
   '/',
   '/index.html',
   '/manual.html',
   '/manifest.json',
+  '/assets/css/styles.css',
   '/assets/icons/icon-192.png',
   '/assets/icons/icon-512.png',
   '/assets/images/preview.png',
