@@ -1,12 +1,22 @@
-const CACHE_NAME = 'zouk-trainer-v3';
+const CACHE_NAME = 'zouk-trainer-v5';
 const ASSETS = [
   '/',
   '/index.html',
   '/manual.html',
   '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  '/preview.png',
+  '/assets/css/styles.css',
+  '/assets/icons/icon-192.png',
+  '/assets/icons/icon-512.png',
+  '/assets/images/preview.png',
+  // App source modules
+  '/src/data/presets.js',
+  '/src/lib/analytics.js',
+  '/src/scene/studio.js',
+  '/src/scene/figure.js',
+  '/src/physics/hair.js',
+  '/src/app/sceneController.js',
+  '/src/ui/overlays.jsx',
+  '/src/ui/ZoukTrainer.jsx',
   // CDN dependencies
   'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
   'https://unpkg.com/react@18/umd/react.production.min.js',

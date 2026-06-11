@@ -9,13 +9,13 @@
   <meta property="fb:app_id" content="1503011584671001" />
   <meta property="og:title" content="Brazilian Zouk 3D Trainer" />
   <meta property="og:description" content="Interactive 3D dance movement visualizer for Brazilian Zouk" />
-  <meta property="og:image" content="https://zouk3dtrainer.netlify.app/preview.png" />
+  <meta property="og:image" content="https://zouk3dtrainer.netlify.app/assets/images/preview.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://zouk3dtrainer.netlify.app" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://zouk3dtrainer.netlify.app/preview.png" />
+  <meta name="twitter:image" content="https://zouk3dtrainer.netlify.app/assets/images/preview.png" />
   <title>Zouk 3D Trainer — Avi Moraly</title>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DM3ZH4XNDS"></script>
@@ -25,16 +25,29 @@
     gtag('js', new Date());
     gtag('config', 'G-DM3ZH4XNDS');
   </script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body, #root { width: 100%; height: 100%; overflow: hidden; background: #1a1410; }
-    .zt-speed-slider-track { flex: 1; min-height: 0; }
-    .zt-slider-speed { height: 100% !important; }
-  </style>
+  <link rel="stylesheet" href="assets/css/styles.css">
+
 </head>
 <body>
   <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+
+  <!-- Third-party runtime (CDN, no build step) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- App modules — transpiled in-browser by Babel, executed in order.
+       They share global scope via the window.ZT namespace. -->
+  <script type="text/babel" data-presets="react" src="src/data/presets.js"></script>
+  <script type="text/babel" data-presets="react" src="src/lib/analytics.js"></script>
+  <script type="text/babel" data-presets="react" src="src/scene/studio.js"></script>
+  <script type="text/babel" data-presets="react" src="src/scene/figure.js"></script>
+  <script type="text/babel" data-presets="react" src="src/physics/hair.js"></script>
+  <script type="text/babel" data-presets="react" src="src/app/sceneController.js"></script>
+  <script type="text/babel" data-presets="react" src="src/ui/overlays.jsx"></script>
+  <script type="text/babel" data-presets="react" src="src/ui/ZoukTrainer.jsx"></script>
+
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js'); });
