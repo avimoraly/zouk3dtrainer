@@ -1,4 +1,4 @@
-const CACHE_NAME = 'zouk-trainer-v5';
+const CACHE_NAME = 'zouk-trainer-v7';
 const ASSETS = [
   '/',
   '/index.html',
