@@ -6,6 +6,24 @@ html, body, #root { width: 100%; height: 100%; overflow: hidden; background: #1a
 .zt-speed-slider-track { flex: 1; min-height: 0; }
 .zt-slider-speed { height: 100% !important; }
 
+/* Tactile press feedback for the header round buttons (share / ? / about)
+   and the preset-bar action buttons (reverse / reset). */
+.zt-btn-share, .zt-btn-manual, .zt-btn-about,
+.zt-btn-reverse, .zt-btn-reset-all {
+  transition: transform 0.08s ease, filter 0.08s ease, box-shadow 0.08s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.zt-btn-share:hover, .zt-btn-manual:hover, .zt-btn-about:hover,
+.zt-btn-reverse:hover, .zt-btn-reset-all:hover {
+  filter: brightness(1.15);
+}
+.zt-btn-share:active, .zt-btn-manual:active, .zt-btn-about:active,
+.zt-btn-reverse:active, .zt-btn-reset-all:active {
+  transform: scale(0.86);
+  filter: brightness(0.78);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.55);
+}
+
 /* ─── EASTER-EGG OVERLAY ANIMATIONS ─────────────────── */
 @keyframes egg-fade    { from{opacity:0} to{opacity:1} }
 @keyframes egg-slam    { 0%{transform:scale(0.1) translateY(60px);opacity:0;letter-spacing:60px} 65%{transform:scale(1.12) translateY(-6px);opacity:1;letter-spacing:5px} 100%{transform:scale(1) translateY(0);letter-spacing:4px} }
